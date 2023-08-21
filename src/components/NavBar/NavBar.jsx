@@ -10,38 +10,38 @@ const NavBar = () => {
   };
 
   return (
-    <div className="bg-gray-800">
+    <div className="bg-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <a
                 href="#"
-                className="text-teal-500 text-xl md:text-2xl lg:text-3xl font-semibold"
+                className="text-[#235784] text-xl md:text-2xl lg:text-3xl font-semibold"
               >
-                Rest Well Scholars
+                ResiZen
               </a>
             </div>
           </div>
           <div className="hidden md:block">
             <div className="ml-10 flex items-center justify-center space-x-4">
-              <a href="#" className="text-gray-300 hover:text-white">
+              <a href="#" className="text-[#235784]">
                 Home
               </a>
-              <a href="#" className="text-gray-300 hover:text-white">
+              <a href="#" className="text-[#235784]">
                 About
               </a>
-              <a href="#" className="text-gray-300 hover:text-white">
+              <a href="#" className="text-[#235784]">
                 Services
               </a>
-              <a href="#" className="text-gray-300 hover:text-white">
+              <a href="#" className="text-[#235784]">
                 Contact
               </a>
             </div>
           </div>
           <div className="flex md:ml-4">
             <Link href="/login">
-              <button className="text-black bg-teal-300 hover:bg-teal-600 px-4 py-3 rounded-md text-sm font-medium">
+              <button className="text-white bg-[#235784] hover:bg-white hover:text-[#235784] px-4 py-3 rounded-md text-sm font-medium">
                 Login
               </button>
             </Link>
@@ -93,16 +93,16 @@ const NavBar = () => {
         id="mobile-menu"
       >
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <a href="#" className="text-gray-300 hover:text-white block">
+          <a href="#" className="text-[#235784] block">
             Home
           </a>
-          <a href="#" className="text-gray-300 hover:text-white block">
+          <a href="#" className="text-[#235784] block">
             About
           </a>
-          <a href="#" className="text-gray-300 hover:text-white block">
-            Services
+          <a href="#" className="text-[#235784] block">
+            Rooms
           </a>
-          <a href="#" className="text-gray-300 hover:text-white block">
+          <a href="#" className="text-[#235784] block">
             Contact
           </a>
         </div>
