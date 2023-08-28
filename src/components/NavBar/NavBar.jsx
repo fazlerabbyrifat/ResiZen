@@ -35,18 +35,18 @@ const NavBar = () => {
           </div>
           <div className="hidden md:block">
             <div className="ml-10 flex items-center justify-center space-x-4">
-              <a href="#" className="text-[#235784]">
+              <Link href="/" className="text-[#235784]">
                 Home
-              </a>
-              <a href="#" className="text-[#235784]">
+              </Link>
+              <Link href="/about" className="text-[#235784]">
                 About
-              </a>
-              <a href="#" className="text-[#235784]">
-                Services
-              </a>
-              <a href="#" className="text-[#235784]">
+              </Link>
+              <Link href="/rooms" className="text-[#235784]">
+                Rooms
+              </Link>
+              <Link href="/contact" className="text-[#235784]">
                 Contact
-              </a>
+              </Link>
             </div>
           </div>
           <div className="md:flex hidden md:ml-4">
@@ -77,18 +77,18 @@ const NavBar = () => {
         id="mobile-menu"
       >
         <div className="pl-6 pt-2 pb-3 space-y-1 sm:px-3">
-          <a href="#" className="text-[#235784] block">
+          <Link href="/" className="text-[#235784] block">
             Home
-          </a>
-          <a href="#" className="text-[#235784] block">
+          </Link>
+          <Link href="/about" className="text-[#235784] block">
             About
-          </a>
-          <a href="#" className="text-[#235784] block">
+          </Link>
+          <Link href="/rooms" className="text-[#235784] block">
             Rooms
-          </a>
-          <a href="#" className="text-[#235784] block">
+          </Link>
+          <Link href="/contact" className="text-[#235784] block">
             Contact
-          </a>
+          </Link>
           <Link href="/login">
             <button className="mt-6 bg-[#235784] text-white hover:bg-white hover:text-[#235784] text-lg py-2 px-6 rounded-full">
               Login

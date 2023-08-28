@@ -2,7 +2,12 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { MdOutlineKingBed } from "react-icons/md";
 import { BiBath } from "react-icons/bi";
-import { ArrowLeftIcon, ArrowRightIcon, MapPinIcon, PhoneIcon } from "@heroicons/react/24/solid";
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  MapPinIcon,
+  PhoneIcon,
+} from "@heroicons/react/24/solid";
 
 const RoomsCard = ({ room }) => {
   const {
@@ -74,28 +79,34 @@ const RoomsCard = ({ room }) => {
           </div>
         </div>
         <div className="flex flex-wrap gap-4 my-2">
-        {amenity?.map((item, index) => (
-          <p key={index} className="bg-gray-100 rounded-lg px-3 py-1 text-center text-xs">
-            {item}
-          </p>
-        ))}
+          {amenity?.map((item, index) => (
+            <p
+              key={index}
+              className="bg-gray-100 rounded-lg px-3 py-1 text-center text-xs"
+            >
+              {item}
+            </p>
+          ))}
         </div>
         <p className="text-sm font-normal mb-2 flex items-center">
           <span>
             <MapPinIcon className="w-3 h-3 mr-2" />
           </span>
           {address}
-          </p>
+        </p>
         <p className="text-sm font-normal mb-2 flex items-center">
           <span>
             <PhoneIcon className="w-3 h-3 mr-2" />
           </span>
-          {contact}</p>
+          {contact}
+        </p>
         <div className="flex mt-4">
           <button className="bg-[#ddeaf6] text-[#235784] px-4 py-2 rounded-full mr-2">
             Book Now
           </button>
-          <button className="bg-[#235784] text-white px-4 py-2 rounded-full">
+          <button
+            className="bg-[#235784] text-white px-4 py-2 rounded-full"
+          >
             Details
           </button>
         </div>
