@@ -11,8 +11,14 @@ const Room = () => {
     })
     console.log(rooms)
     return (
-        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2'>
+            <div className='md:flex items-center justify-between mb-5'>
+                <h3 className='text-3xl font-semibold'>Hostel Rooms</h3>
+                <button className='bg-[#ddeaf6] text-[#235784] px-4 py-2 rounded-full mr-2'>View All Rooms</button>
+            </div>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
             { rooms.slice(0,3).map(room => <RoomsCard key={room?.id} room={room}></RoomsCard>)}
+        </div>
         </div>
     );
 };

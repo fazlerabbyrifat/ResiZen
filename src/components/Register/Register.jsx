@@ -3,6 +3,9 @@ import { useFormik } from "formik";
 import React from "react";
 import signUpSchema from "../schemas";
 import Link from "next/link";
+import axios from "axios";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { Toaster, toast } from "react-hot-toast";
 
 const Register = () => {
   const initialValues = {
@@ -13,14 +16,60 @@ const Register = () => {
     password: "",
     confirm_password: "",
   };
+
+  const checkEmailAvailability = async (email) => {
+    const response = await axios.get(
+      `https://64e3355abac46e480e786405.mockapi.io/users?email=${email}`
+    );
+    return response.data.length === 0;
+  };
+  const emailAvailabilityQuery = useQuery(
+    ["emailAvailability"],
+    () => checkEmailAvailability(values.email),
+    {
+      enabled: false,
+    }
+  );
+
+  const createUserMutation = useMutation(
+    (newUser) =>
+      axios.post("https://64e3355abac46e480e786405.mockapi.io/users", newUser),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("users");
+        toast.success("Registration successful!");
+      },
+      onError: (error) => {
+        toast.error("Registration failed. Please try again.");
+      },
+    }
+  );
+
   const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
     useFormik({
       initialValues,
       validationSchema: signUpSchema,
-      onSubmit: (values, action) => {
-        console.log(values);
+      onSubmit: () => {
+        emailAvailabilityQuery.refetch().then(() => {
+          if (emailAvailabilityQuery.data) {
+            const newUser = {
+              firstName: values.firstName,
+              lastName: values.lastName,
+              mobile: values.mobile,
+              email: values.email,
+              password: values.password,
+              confirm_password: values.confirm_password,
+            };
+            createUserMutation.mutate(newUser);
+          } else {
+            toast.error(
+              "Email is already registered. Please use a different email."
+            );
+          }
+        });
       },
     });
+
   return (
     <div>
       <form onSubmit={handleSubmit} className="mx-auto">
@@ -171,6 +220,7 @@ const Register = () => {
           <Link href="/login">Please Login</Link>
         </span>
       </p>
+      <Toaster />
     </div>
   );
 };
