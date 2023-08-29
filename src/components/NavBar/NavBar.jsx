@@ -90,7 +90,7 @@ const NavBar = () => {
             Contact
           </Link>
           <Link href="/login">
-            <button className="mt-6 bg-[#235784] text-white hover:bg-white hover:text-[#235784] text-lg py-2 px-6 rounded-full">
+            <button className="mt-6 bg-[#235784] text-white hover:bg-white hover:text-[#235784] text-lg py-2 px-6 rounded-lg">
               Login
             </button>
           </Link>

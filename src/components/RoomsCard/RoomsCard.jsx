@@ -50,13 +50,13 @@ const RoomsCard = ({ room }) => {
         </div>
         <button
           onClick={handlePrevClick}
-          className="absolute top-1/2 left-0 transform -translate-y-1/2 text-white px-3 py-2 rounded-full m-2 bg-gray-300"
+          className="absolute top-1/2 left-0 transform -translate-y-1/2 text-white px-3 py-2 rounded-lg m-2 bg-gray-300"
         >
           <ArrowLeftIcon className="h-5 w-5" />
         </button>
         <button
           onClick={handleNextClick}
-          className="absolute top-1/2 right-0 transform -translate-y-1/2 text-white px-3 py-2 rounded-full m-2 bg-gray-300"
+          className="absolute top-1/2 right-0 transform -translate-y-1/2 text-white px-3 py-2 rounded-lg m-2 bg-gray-300"
         >
           <ArrowRightIcon className="h-5 w-5" />
         </button>
@@ -101,11 +101,11 @@ const RoomsCard = ({ room }) => {
           {contact}
         </p>
         <div className="flex mt-4">
-          <button className="bg-[#ddeaf6] text-[#235784] px-4 py-2 rounded-full mr-2">
+          <button className="bg-[#ddeaf6] text-[#235784] px-4 py-2 rounded-lg mr-2">
             Book Now
           </button>
           <button
-            className="bg-[#235784] text-white px-4 py-2 rounded-full"
+            className="bg-[#235784] text-white px-4 py-2 rounded-lg"
           >
             Details
           </button>

@@ -26,7 +26,7 @@ const Room = () => {
         <h3 className="text-3xl font-semibold">Hostel Rooms</h3>
         <button
           onClick={handleViewAllRooms}
-          className="bg-[#ddeaf6] text-[#235784] px-4 py-2 rounded-full mr-2"
+          className="bg-[#ddeaf6] text-[#235784] px-4 py-2 rounded-lg mr-2"
         >
           View All Rooms
         </button>

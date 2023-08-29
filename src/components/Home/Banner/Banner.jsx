@@ -11,7 +11,7 @@ const Banner = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 mb-10 lg:flex items-center scroll-smooth">
-      <div className={`lg:w-[580px] bg-gray-100 px-10 py-16 my-5 ${
+      <div className={`lg:w-[580px] bg-gray-100 px-10 py-16 my-5 rounded-l-md ${
           isAnimated ? "opacity-100 translate-y-0 transition-transform duration-1000 ease-in-out" : "opacity-0 translate-y-40"
         }`}>
         <h1 className="text-2xl lg:text-4xl font-bold text-black mb-4">
@@ -23,13 +23,13 @@ const Banner = () => {
           cozy spaces, engage with a diverse community, and create memories that
           last a lifetime.
         </p>
-        <button className="mt-6 bg-[#235784] text-white hover:bg-white hover:text-[#235784] text-lg py-2 px-6 rounded-full">
+        <button className="mt-6 bg-[#235784] text-white hover:bg-white hover:text-[#235784] text-lg py-2 px-6 rounded-lg">
             Discover More
           </button>
       </div>
       <div className={`lg:w-[700px] ${isAnimated ? "opacity-100 translate-y-0 transition-transform duration-1000 ease-in-out" : "opacity-0 translate-y-40"}`}>
         <Image
-          className="w-full"
+          className="w-full rounded-r-lg"
           src="/banner.jpg"
           alt="bannerImage"
           width={1500}
