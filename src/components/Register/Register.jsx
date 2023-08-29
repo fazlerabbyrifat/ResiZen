@@ -4,8 +4,15 @@ import React from "react";
 import signUpSchema from "../schemas";
 import Link from "next/link";
 import axios from "axios";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { Toaster, toast } from "react-hot-toast";
+
+const queryClient = new QueryClient();
+
+const fetchUsers = async () => {
+  const response = await axios.get("https://64e3355abac46e480e786405.mockapi.io/users");
+  return response.data;
+};
 
 const Register = () => {
   const initialValues = {
@@ -30,6 +37,8 @@ const Register = () => {
       enabled: false,
     }
   );
+
+  const usersQuery = useQuery(["users"], fetchUsers);
 
   const createUserMutation = useMutation(
     (newUser) =>

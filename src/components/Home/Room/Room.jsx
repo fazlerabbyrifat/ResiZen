@@ -21,8 +21,8 @@ const Room = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 my-5 scroll-smooth">
-      <div className="md:flex items-center justify-between mb-5">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 my-16 scroll-smooth">
+      <div className="md:flex items-center justify-between mb-10">
         <h3 className="text-3xl font-semibold">Hostel Rooms</h3>
         <button
           onClick={handleViewAllRooms}

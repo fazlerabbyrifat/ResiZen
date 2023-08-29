@@ -37,7 +37,7 @@ const RoomsCard = ({ room }) => {
 
   return (
     <div className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl">
-      <div className="w-full h-96 relative">
+      <div className="w-full h-80 relative">
         <Image
           className="w-full h-full object-cover transition-shadow duration-300 transform hover:shadow-md hover:scale-105"
           src={images[currentImageIndex]}
@@ -50,13 +50,13 @@ const RoomsCard = ({ room }) => {
         </div>
         <button
           onClick={handlePrevClick}
-          className="absolute top-1/2 left-0 transform -translate-y-1/2 text-black px-4 py-2 rounded-full m-2"
+          className="absolute top-1/2 left-0 transform -translate-y-1/2 text-white px-3 py-2 rounded-full m-2 bg-gray-300"
         >
           <ArrowLeftIcon className="h-5 w-5" />
         </button>
         <button
           onClick={handleNextClick}
-          className="absolute top-1/2 right-0 transform -translate-y-1/2 text-black px-4 py-2 rounded-full m-2"
+          className="absolute top-1/2 right-0 transform -translate-y-1/2 text-white px-3 py-2 rounded-full m-2 bg-gray-300"
         >
           <ArrowRightIcon className="h-5 w-5" />
         </button>

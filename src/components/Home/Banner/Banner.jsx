@@ -10,7 +10,7 @@ const Banner = () => {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 lg:flex items-center scroll-smooth">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 mb-10 lg:flex items-center scroll-smooth">
       <div className={`lg:w-[580px] bg-gray-100 px-10 py-16 my-5 ${
           isAnimated ? "opacity-100 translate-y-0 transition-transform duration-1000 ease-in-out" : "opacity-0 translate-y-40"
         }`}>
