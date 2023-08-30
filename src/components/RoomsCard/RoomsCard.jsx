@@ -37,9 +37,9 @@ const RoomsCard = ({ room }) => {
 
   return (
     <div className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl">
-      <div className="w-full h-80 relative">
+      <div className="w-full  relative">
         <Image
-          className="w-full h-full object-cover transition-shadow duration-300 transform hover:shadow-md hover:scale-105"
+          className="w-full aspect-[16/10] object-center object-cover transition-shadow duration-300 transform hover:shadow-md hover:scale-105"
           src={images[currentImageIndex]}
           alt={name}
           width={350}
@@ -50,21 +50,37 @@ const RoomsCard = ({ room }) => {
         </div>
         <button
           onClick={handlePrevClick}
-          className="absolute top-1/2 left-0 transform -translate-y-1/2 text-white px-3 py-2 rounded-lg m-2 bg-gray-300"
+          className="absolute top-1/2 left-0 transform -translate-y-1/2 text-white p-2 rounded-full m-2 bg-gray-900 bg-opacity-60"
         >
           <ArrowLeftIcon className="h-5 w-5" />
         </button>
         <button
           onClick={handleNextClick}
-          className="absolute top-1/2 right-0 transform -translate-y-1/2 text-white px-3 py-2 rounded-lg m-2 bg-gray-300"
+          className="absolute top-1/2 right-0 transform -translate-y-1/2 text-white p-2 rounded-full m-2 bg-gray-900 bg-opacity-60"
         >
           <ArrowRightIcon className="h-5 w-5" />
         </button>
       </div>
-      <div className="p-4">
-        <h2 className="text-xl font-semibold mb-2">{name}</h2>
-        <p className="text-gray-600 mb-4">${price} /mo</p>
-        <div className="flex items-center gap-5">
+      <div className="p-4 space-y-3">
+        <h2 className="text-xl font-semibold ">{name}</h2>
+        <p className="text-gray-600 ">${price} /mo</p>
+        <p className="text-sm font-normal  flex items-center">
+          <span>
+            <MapPinIcon className="w-3 h-3 mr-2" />
+          </span>
+          {address}
+        </p>
+        <div className="flex flex-wrap gap-y-4 gap-x-4 ">
+          {amenity?.map((item, index) => (
+            <p
+              key={index}
+              className="bg-gray-100 rounded-lg px-3 py-1 text-center text-xs"
+            >
+              {item}
+            </p>
+          ))}
+        </div>
+        <div className="flex items-center gap-y-5 gap-x-4">
           <div className="flex items-center gap-2 text-sm font-normal">
             <span>
               <MdOutlineKingBed />
@@ -78,34 +94,12 @@ const RoomsCard = ({ room }) => {
             <p>{baths} Baths</p>
           </div>
         </div>
-        <div className="flex flex-wrap gap-4 my-2">
-          {amenity?.map((item, index) => (
-            <p
-              key={index}
-              className="bg-gray-100 rounded-lg px-3 py-1 text-center text-xs"
-            >
-              {item}
-            </p>
-          ))}
-        </div>
-        <p className="text-sm font-normal mb-2 flex items-center">
-          <span>
-            <MapPinIcon className="w-3 h-3 mr-2" />
-          </span>
-          {address}
-        </p>
-        <p className="text-sm font-normal mb-2 flex items-center">
-          <span>
-            <PhoneIcon className="w-3 h-3 mr-2" />
-          </span>
-          {contact}
-        </p>
-        <div className="flex mt-4">
-          <button className="bg-[#ddeaf6] text-[#235784] px-4 py-2 rounded-lg mr-2">
+        <div className="flex justify-end gap-5 ">
+          <button className="bg-[#ddeaf6] text-[#235784] px-4 py-2 mt-5 rounded-lg">
             Book Now
           </button>
           <button
-            className="bg-[#235784] text-white px-4 py-2 rounded-lg"
+            className="bg-[#235784] text-white px-4 py-2 mt-5 rounded-lg"
           >
             Details
           </button>

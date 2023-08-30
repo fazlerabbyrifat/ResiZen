@@ -22,7 +22,7 @@ const Gallery = () => {
             alt="galleryImage"
             width={450}
             height={450}
-            className="h-[400px] rounded"
+            className="aspect-[16/10] object-center object-cover rounded"
           ></Image>
         ))}
       </div>

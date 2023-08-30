@@ -4,6 +4,10 @@ import Image from 'next/image';
 import React from 'react';
 
 const Features = () => {
+    const handleBookRooms = () => {
+        window.location.href = "/rooms";
+      };
+
     return (
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 my-10 md:flex items-center scroll-smooth'>
             <div className='md:w-1/2 pt-10 pr-10'>
@@ -37,7 +41,7 @@ const Features = () => {
                         <p className='text-base font-medium'>Proper entertainment facilities</p>
                     </div>
                 </div>
-                <div className='flex items-center gap-5'>
+                <div onClick={handleBookRooms} className='flex items-center gap-5'>
                     <button className='mt-6 bg-[#235784] text-white hover:bg-white hover:text-[#235784] text-lg py-2 px-6 rounded-lg'>Book Now</button>
                     <button className='flex items-center pt-6 text-[#235784]'>
                         More About <span>
