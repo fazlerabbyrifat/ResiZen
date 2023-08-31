@@ -17,10 +17,8 @@ const RoomsCard = ({ room }) => {
     address,
     beds,
     amenity,
-    house_type,
     baths,
     price,
-    contact,
   } = room;
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -34,6 +32,10 @@ const RoomsCard = ({ room }) => {
     const prevIndex = (currentImageIndex - 1 + images.length) % images.length;
     setCurrentImageIndex(prevIndex);
   };
+
+  const handleDetails = (id) => {
+    window.location.href = `/rooms/${id}`
+  }
 
   return (
     <div className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl">
@@ -99,6 +101,7 @@ const RoomsCard = ({ room }) => {
             Book Now
           </button>
           <button
+          onClick={() => handleDetails(id)}
             className="bg-[#235784] text-white px-4 py-2 mt-5 rounded-lg"
           >
             Details
