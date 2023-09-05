@@ -1,4 +1,6 @@
 "use client";
+import Amenities from "@/components/Amenities/Amenities";
+import PropertyDetails from "@/components/PropertyDetails/PropertyDetails";
 import PropertyImages from "@/components/PropertyImages/PropertyImages";
 import PropertyInfo from "@/components/PropertyInfo/PropertyInfo";
 import RoomDetailsNavbar from "@/components/RoomDetailsNavbar/RoomDetailsNavbar";
@@ -19,19 +21,6 @@ const SingleRoomDetailsPage = ({ params }) => {
     return response.data;
   });
 
-  useEffect(() => {
-    const links = document.querySelectorAll('a[href^="#"]');
-    links.forEach((link) => {
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
-        const target = document.querySelector(link.getAttribute("href"));
-        if (target) {
-          target.scrollIntoView({ behavior: "smooth" });
-        }
-      });
-    });
-  }, []);
-
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -41,12 +30,17 @@ const SingleRoomDetailsPage = ({ params }) => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 scroll-smooth">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
       <RoomDetailsNavbar />
-      <div id="#propertyImages">
-        <PropertyImages images={roomDetails?.images} />
-        <PropertyInfo name = {roomDetails?.name} address = {roomDetails?.address} />
-      </div>
+      <PropertyImages images={roomDetails?.images} />
+      <PropertyInfo name={roomDetails?.name} address={roomDetails?.address} />
+      <PropertyDetails
+        details={roomDetails?.details}
+        price={roomDetails?.price}
+        address={roomDetails?.address}
+        contact={roomDetails?.contact}
+      />
+      <Amenities amenities={roomDetails?.amenity} />
     </div>
   );
 };

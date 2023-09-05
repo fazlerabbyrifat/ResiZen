@@ -15,7 +15,7 @@ const Banner = () => {
           isAnimated ? "opacity-100 translate-y-0 transition-transform duration-1000 ease-in-out" : "opacity-0 translate-y-40"
         }`}>
         <h1 className="text-2xl lg:text-4xl font-bold text-black mb-4">
-          Elevate Your Student Living with ResiZen: Where Comfort Meets
+          Elevate Your Student Living with ResiZen <br /> Where Comfort Meets
           Connection
         </h1>
         <p className="text-base font-medium">

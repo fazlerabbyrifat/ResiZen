@@ -17,8 +17,8 @@ const NavBar = () => {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <a
-                href="#"
+              <Link
+                href="/"
                 className="text-[#235784] flex items-center text-xl md:text-2xl lg:text-3xl font-semibold"
               >
                 <span>
@@ -30,7 +30,7 @@ const NavBar = () => {
                   ></Image>
                 </span>
                 ResiZen
-              </a>
+              </Link>
             </div>
           </div>
           <div className="hidden md:block">

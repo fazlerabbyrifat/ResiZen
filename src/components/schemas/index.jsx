@@ -9,7 +9,7 @@ const signUpSchema = Yup.object({
     .min(3)
     .max(20)
     .required("Please enter your second name"),
-  mobile: Yup.string()
+  phone: Yup.string()
     .matches(/^\d{10,11}$/, "Must be a valid phone number with 10 to 11 digits")
     .required("Please enter your mobile number"),
   email: Yup.string().email().required("Please enter your email"),

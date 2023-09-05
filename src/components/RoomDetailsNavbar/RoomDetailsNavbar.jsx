@@ -1,8 +1,9 @@
 "use client";
+import Link from "next/link";
 import React, { useState } from "react";
 
 const RoomDetailsNavbar = () => {
-  const [activeLink, setActiveLink] = useState("");
+  const [activeLink, setActiveLink] = useState("#propertyImages");
 
   const handleLinkClick = (link) => {
     setActiveLink(link);
@@ -11,30 +12,22 @@ const RoomDetailsNavbar = () => {
   return (
     <nav className="max-w-7xl mx-auto py-5 bg-white sticky top-0 w-full z-50">
       <div>
-        <ul className="flex space-x-8 justify-start">
-          <li>
-            <a
-              href="#propertyImages"
-              className={`text-gray-600 hover:text-black text-lg font-semibold pb-2 ${
-                activeLink === "propertyImages" ? "text-black border-b-2 border-[#235784]" : ""
-              }`}
-              onClick={() => handleLinkClick("propertyImages")}
-            >
+      <ul className="flex space-x-8 justify-start">
+          <li className={activeLink === "#propertyImages" ? "text-black text-lg font-semibold pb-2 border-b-2 border-black" : "text-gray-600 hover:text-black text-lg font-semibold pb-2"}>
+            <Link href="#propertyImages" onClick={() => handleLinkClick("#propertyImages")}>
               Property Images
-            </a>
+            </Link>
           </li>
-          <li>
-            <a
-              href="#about"
-              className={`text-gray-300 hover:text-black ${
-                activeLink === "about" ? "text-blue-600 underline" : ""
-              }`}
-              onClick={() => handleLinkClick("about")}
-            >
-              About
-            </a>
+          <li className={activeLink === "#propertyDetails" ? "text-black text-lg font-semibold pb-2 border-b-2 border-black" : "text-gray-600 hover:text-black text-lg font-semibold pb-2"}>
+            <Link href="#propertyDetails" onClick={() => handleLinkClick("#propertyDetails")}>
+              Property Details
+            </Link>
           </li>
-          {/* Repeat similar pattern for other links */}
+          <li className={activeLink === "#amenities" ? "text-black text-lg font-semibold pb-2 border-b-2 border-black" : "text-gray-600 hover:text-black text-lg font-semibold pb-2"}>
+            <Link href="#amenities" onClick={() => handleLinkClick("#amenities")}>
+              Amenities
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>

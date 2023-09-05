@@ -1,13 +1,16 @@
 "use client";
 import { useFormik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import signUpSchema from "../schemas";
 import Link from "next/link";
 import axios from "axios";
 import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { Toaster, toast } from "react-hot-toast";
+import Image from "next/image";
+
 
 const queryClient = new QueryClient();
+const img_hosting_token = process.env.NEXT_PUBLIC_Image_Upload_Token;
 
 const fetchUsers = async () => {
   const response = await axios.get("https://64e3355abac46e480e786405.mockapi.io/users");
@@ -15,13 +18,19 @@ const fetchUsers = async () => {
 };
 
 const Register = () => {
+  const [imageFile, setImageFile] = useState(null);
   const initialValues = {
     firstName: "",
     lastName: "",
-    mobile: "",
+    phone: "",
     email: "",
     password: "",
     confirm_password: "",
+  };
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    setImageFile(file);
   };
 
   const checkEmailAvailability = async (email) => {
@@ -47,6 +56,7 @@ const Register = () => {
       onSuccess: () => {
         queryClient.invalidateQueries("users");
         toast.success("Registration successful!");
+        resetForm();
       },
       onError: (error) => {
         toast.error("Registration failed. Please try again.");
@@ -54,28 +64,38 @@ const Register = () => {
     }
   );
 
-  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit, resetForm } =
     useFormik({
       initialValues,
-      validationSchema: signUpSchema,
-      onSubmit: () => {
-        emailAvailabilityQuery.refetch().then(() => {
-          if (emailAvailabilityQuery.data) {
-            const newUser = {
-              firstName: values.firstName,
-              lastName: values.lastName,
-              mobile: values.mobile,
-              email: values.email,
-              password: values.password,
-              confirm_password: values.confirm_password,
-            };
-            createUserMutation.mutate(newUser);
-          } else {
-            toast.error(
-              "Email is already registered. Please use a different email."
-            );
-          }
-        });
+      signUpSchema,
+      onSubmit: (values) => {
+        if (imageFile) {
+          const formData = new FormData();
+          formData.append("image", imageFile);
+
+          axios
+            .post(`https://api.imgbb.com/1/upload?key=${img_hosting_token}`, formData)
+            .then((response) => {
+              const imageUrl = response.data.data.url;
+
+              const newUser = {
+                firstName: values.firstName,
+                lastName: values.lastName,
+                phone: values.phone,
+                email: values.email,
+                password: values.password,
+                confirm_password: values.confirm_password,
+                imageUrl,
+              };
+
+              createUserMutation.mutate(newUser);
+            })
+            .catch((error) => {
+              toast.error("Image upload failed. Please try again.");
+            });
+        } else {
+          toast.error("Please select an image to upload.");
+        }
       },
     });
 
@@ -129,25 +149,46 @@ const Register = () => {
         <div className="my-2">
           <label
             className="block text-[#235784] font-medium mb-1"
-            htmlFor="mobile"
+            htmlFor="Phone"
           >
-            Mobile
+            Phone
           </label>
           <input
             type="tel"
-            id="mobile"
-            name="mobile"
+            id="phone"
+            name="phone"
             className="w-full border rounded py-2 px-3 focus:outline-none focus:ring focus:border-blue-300"
             placeholder="Enter your mobile number"
             autoComplete="off"
-            value={values.mobile}
+            value={values.phone}
             onChange={handleChange}
             onBlur={handleBlur}
             inputMode="numeric"
           />
-          {errors.mobile && touched.mobile ? (
-            <p className="text-red-500 text-sm mt-1">{errors.mobile}</p>
+          {errors.phone && touched.phone ? (
+            <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
           ) : null}
+        </div>
+        <div className="my-2">
+          <label className="block text-[#235784] font-medium mb-1" htmlFor="image">
+            Profile Image
+          </label>
+          <input
+            type="file"
+            id="image"
+            name="image"
+            accept="image/*"
+            onChange={handleImageUpload}
+          />
+          {imageFile && (
+            <Image
+              src={URL.createObjectURL(imageFile)}
+              alt="Selected Image"
+              width={40}
+              height={40}
+              className="mt-2 max-w-[200px]"
+            />
+          )}
         </div>
         <div className="my-2">
           <label

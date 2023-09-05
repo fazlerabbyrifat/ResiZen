@@ -5,7 +5,7 @@ const PropertyImages = ({ images }) => {
   const [mainImage, ...otherImages] = images;
 
   return (
-    <div className="md:grid md:grid-cols-4 gap-3 my-10">
+    <div id="propertyImages" className="md:grid md:grid-cols-4 gap-3 mt-3 mb-10">
       <div className="md:col-span-2">
         <Image
           src={mainImage}
