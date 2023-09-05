@@ -7,18 +7,25 @@ import axios from "axios";
 import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { Toaster, toast } from "react-hot-toast";
 import Image from "next/image";
-
+import { useRouter } from "next/navigation";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
 const queryClient = new QueryClient();
 const img_hosting_token = process.env.NEXT_PUBLIC_Image_Upload_Token;
 
 const fetchUsers = async () => {
-  const response = await axios.get("https://64e3355abac46e480e786405.mockapi.io/users");
+  const response = await axios.get(
+    "https://64e3355abac46e480e786405.mockapi.io/users"
+  );
   return response.data;
 };
 
 const Register = () => {
   const [imageFile, setImageFile] = useState(null);
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+  const router = useRouter();
+
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -57,6 +64,7 @@ const Register = () => {
         queryClient.invalidateQueries("users");
         toast.success("Registration successful!");
         resetForm();
+        router.push("/");
       },
       onError: (error) => {
         toast.error("Registration failed. Please try again.");
@@ -64,40 +72,50 @@ const Register = () => {
     }
   );
 
-  const { values, errors, touched, handleChange, handleBlur, handleSubmit, resetForm } =
-    useFormik({
-      initialValues,
-      signUpSchema,
-      onSubmit: (values) => {
-        if (imageFile) {
-          const formData = new FormData();
-          formData.append("image", imageFile);
+  const {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    resetForm,
+  } = useFormik({
+    initialValues,
+    validationSchema: signUpSchema,
+    onSubmit: (values) => {
+      if (imageFile) {
+        const formData = new FormData();
+        formData.append("image", imageFile);
 
-          axios
-            .post(`https://api.imgbb.com/1/upload?key=${img_hosting_token}`, formData)
-            .then((response) => {
-              const imageUrl = response.data.data.url;
+        axios
+          .post(
+            `https://api.imgbb.com/1/upload?key=${img_hosting_token}`,
+            formData
+          )
+          .then((response) => {
+            const imageUrl = response.data.data.url;
 
-              const newUser = {
-                firstName: values.firstName,
-                lastName: values.lastName,
-                phone: values.phone,
-                email: values.email,
-                password: values.password,
-                confirm_password: values.confirm_password,
-                imageUrl,
-              };
+            const newUser = {
+              firstName: values.firstName,
+              lastName: values.lastName,
+              phone: values.phone,
+              email: values.email,
+              password: values.password,
+              confirm_password: values.confirm_password,
+              imageUrl,
+            };
 
-              createUserMutation.mutate(newUser);
-            })
-            .catch((error) => {
-              toast.error("Image upload failed. Please try again.");
-            });
-        } else {
-          toast.error("Please select an image to upload.");
-        }
-      },
-    });
+            createUserMutation.mutate(newUser);
+          })
+          .catch((error) => {
+            toast.error("Image upload failed. Please try again.");
+          });
+      } else {
+        toast.error("Please select an image to upload.");
+      }
+    },
+  });
 
   return (
     <div>
@@ -170,7 +188,10 @@ const Register = () => {
           ) : null}
         </div>
         <div className="my-2">
-          <label className="block text-[#235784] font-medium mb-1" htmlFor="image">
+          <label
+            className="block text-[#235784] font-medium mb-1"
+            htmlFor="image"
+          >
             Profile Image
           </label>
           <input
@@ -212,7 +233,7 @@ const Register = () => {
             <p className="text-red-500 text-sm mt-1">{errors.email}</p>
           ) : null}
         </div>
-        <div className="my-2">
+        <div className="my-2 relative">
           <label
             className="block text-[#235784] font-medium mb-1"
             htmlFor="password"
@@ -220,7 +241,7 @@ const Register = () => {
             Password
           </label>
           <input
-            type="password"
+            type={passwordVisible ? "text" : "password"}
             id="password"
             name="password"
             className="w-full border rounded py-2 px-3 focus:outline-none focus:ring focus:border-blue-300"
@@ -233,8 +254,19 @@ const Register = () => {
           {errors.password && touched.password ? (
             <p className="text-red-500 text-sm mt-1">{errors.password}</p>
           ) : null}
+          <button
+            type="button"
+            className="absolute right-3 top-12 transform -translate-y-1/2"
+            onClick={() => setPasswordVisible(!passwordVisible)}
+          >
+            {passwordVisible ? (
+              <EyeSlashIcon className="h-5 w-5 text-[#235784]" />
+            ) : (
+              <EyeIcon className="h-5 w-5 text-[#235784]" />
+            )}
+          </button>
         </div>
-        <div className="my-2">
+        <div className="my-2 relative">
           <label
             className="block text-[#235784] font-medium mb-1"
             htmlFor="confirm_password"
@@ -242,7 +274,7 @@ const Register = () => {
             Confirm Password
           </label>
           <input
-            type="password"
+            type={confirmPasswordVisible ? "text" : "password"}
             id="confirm_password"
             name="confirm_password"
             className="w-full border rounded py-2 px-3 focus:outline-none focus:ring focus:border-blue-300"
@@ -257,6 +289,17 @@ const Register = () => {
               {errors.confirm_password}
             </p>
           ) : null}
+          <button
+            type="button"
+            className="absolute right-3 top-12 transform -translate-y-1/2"
+            onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
+          >
+            {confirmPasswordVisible ? (
+              <EyeSlashIcon className="h-5 w-5 text-[#235784]" />
+            ) : (
+              <EyeIcon className="h-5 w-5 text-[#235784]" />
+            )}
+          </button>
         </div>
         <input
           className="w-full bg-[#235784] text-white py-2 px-4 rounded-md hover:bg-white hover:text-[#235784] transition ease-in-out duration-150 mt-3"

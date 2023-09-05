@@ -99,37 +99,44 @@ const RoomsPage = () => {
           </div>
 
           <div className="w-full md:w-1/3">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Price Range
-            </label>
-            <div className="flex space-x-2">
-              <input
-                type="number"
-                placeholder="Min Price"
-                className="block w-full bg-white border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500"
-                value={selectedPriceRange[0]}
-                onChange={(e) => {
-                  setSelectedPriceRange([
-                    parseInt(e.target.value),
-                    selectedPriceRange[1],
-                  ]);
-                }}
-              />
-              <span>-</span>
-              <input
-                type="number"
-                placeholder="Max Price"
-                className="block w-full bg-white border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500"
-                value={selectedPriceRange[1]}
-                onChange={(e) => {
-                  setSelectedPriceRange([
-                    selectedPriceRange[0],
-                    parseInt(e.target.value),
-                  ]);
-                }}
-              />
-            </div>
-          </div>
+  <label className="block text-sm font-medium text-gray-700 mb-2">
+    Min Price
+  </label>
+  <div className="flex space-x-2">
+    <input
+      type="number"
+      placeholder="Min Price"
+      className="block w-full bg-white border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500"
+      value={selectedPriceRange[0]}
+      onChange={(e) => {
+        setSelectedPriceRange([
+          parseInt(e.target.value),
+          selectedPriceRange[1],
+        ]);
+      }}
+    />
+  </div>
+</div>
+
+<div className="w-full md:w-1/3">
+  <label className="block text-sm font-medium text-gray-700 mb-2">
+    Max Price
+  </label>
+  <div className="flex space-x-2">
+    <input
+      type="number"
+      placeholder="Max Price"
+      className="block w-full bg-white border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500"
+      value={selectedPriceRange[1]}
+      onChange={(e) => {
+        setSelectedPriceRange([
+          selectedPriceRange[0],
+          parseInt(e.target.value),
+        ]);
+      }}
+    />
+  </div>
+</div>
         </div>
       </div>
       {filteredData.length === 0 && (

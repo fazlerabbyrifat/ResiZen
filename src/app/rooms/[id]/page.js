@@ -35,9 +35,9 @@ const SingleRoomDetailsPage = ({ params }) => {
       <PropertyImages images={roomDetails?.images} />
       <PropertyInfo name={roomDetails?.name} address={roomDetails?.address} />
       <PropertyDetails
+        name={roomDetails?.name}
         details={roomDetails?.details}
         price={roomDetails?.price}
-        address={roomDetails?.address}
         contact={roomDetails?.contact}
       />
       <Amenities amenities={roomDetails?.amenity} />

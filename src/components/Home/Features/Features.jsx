@@ -51,7 +51,7 @@ const Features = () => {
                 </div>
             </div>
             <div className='md:w-1/2 mt-5 md:mt-0'>
-                <Image className='w-full' src="/featureImage.jpg" alt='feature image' width={450} height={450}></Image>
+                <Image className='w-full rounded-lg' src="/featureImage.jpg" alt='feature image' width={450} height={450}></Image>
             </div>
         </div>
     );
